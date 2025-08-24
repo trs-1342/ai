@@ -1,57 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>GoogleBot Demo</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-      body {
-        height: 100vh;
-        overflow-y: hidden;
-        background: linear-gradient(to bottom right, #1a1a1a, #333333);
-        font-family: Arial, sans-serif;
-        color: #fff;
-      }
-      .card {
-        background: linear-gradient(to bottom right, #151515, #2e2e2e);
-        border-radius: 0;
-      }
-      .card-header {
-        background: linear-gradient(to bottom right, #121212, #1d1d1d);
-        border-color: transparent;
-      }
-      .card-body {
-        max-height: 300px;
-        height: 50vh;
-        overflow-y: scroll;
-        scrollbar-width: thin;
-        scrollbar-color: #555 #222;
-      }
-      .alert {
-        border-radius: 0;
-      }
-      .alert-secondary {
-        background-color: #555;
-        color: #fff;
-        border-color: #555;
-      }
-      .form-control {
-        border-radius: 0;
-        border-color: #555;
-        background-color: #333;
-        color: #fff;
-      }
-      .btn-primary {
-        border-radius: 0;
-        background-color: #555;
-        border-color: #555;
-      }
-      .btn-primary:hover {
-        background-color: #777;
-        border-color: #777;
-      }
-    </style>
-  </head>
+    <%- include('inc/head') %>
   <body>
     <div class="container mt-5">
       <div class="card">
@@ -65,7 +14,11 @@
         </div>
         <div class="card-footer">
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Mesajınızı yazın...">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Mesajınızı yazın..."
+            />
             <div class="input-group-append">
               <button class="btn btn-primary" type="button">Gönder</button>
             </div>
@@ -73,84 +26,98 @@
         </div>
       </div>
     </div>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9621170722969304"
-     crossorigin="anonymous"></script>
-<!-- deneme -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-9621170722969304"
-     data-ad-slot="8025882334"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9621170722969304"
+      crossorigin="anonymous"
+    ></script>
+    <!-- deneme -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-9621170722969304"
+      data-ad-slot="8025882334"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-      $(function() {
-        var $chatbox = $('#chatbox');
+      $(function () {
+        var $chatbox = $("#chatbox");
 
         function addMessage(msg, isUser) {
-          var $div = $('<div>');
-          $div.addClass('alert mb-3');
+          var $div = $("<div>");
+          $div.addClass("alert mb-3");
           if (isUser) {
-            $div.addClass('alert-secondary text-right');
+            $div.addClass("alert-secondary text-right");
           } else {
-            $div.addClass('alert-info');
+            $div.addClass("alert-info");
           }
           $div.text(msg);
           $chatbox.append($div);
         }
 
-        $('button').on('click', function() {
-          var $input = $('input');
-          var       message = $input.val().trim();
+        $("button").on("click", function () {
+          var $input = $("input");
+          var message = $input.val().trim();
 
-// Check if input is not empty
-if (message !== '') {
-  addMessage(message, true);
+          // Check if input is not empty
+          if (message !== "") {
+            addMessage(message, true);
 
-  // Send message to server and get response
-  $.ajax({
-    type: 'POST',
-    url: '/message',
-    data: { query: message },
-    success: function(response) {
-      addMessage(response.answer, false);
-    },
-    error: function() {
-      addMessage('Hata: Sunucu ile iletişim kurulamıyor.', false);
-    }
-  });
+            // Send message to server and get response
+            $.ajax({
+              type: "POST",
+              url: "/message",
+              data: { query: message },
+              success: function (response) {
+                addMessage(response.answer, false);
+              },
+              error: function () {
+                addMessage("Hata: Sunucu ile iletişim kurulamıyor.", false);
+              },
+            });
 
-  // Clear input field
-  $input.val('');
-}
-});
+            // Clear input field
+            $input.val("");
+          }
+        });
 
-// Send message when Enter key is pressed
-$('input').on('keypress', function(e) {
-if (e.which === 13) {
-  $('button').click();
-  return false;
-}
-});
-});
-</script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9621170722969304"
-     crossorigin="anonymous"></script>
-<!-- deneme -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-9621170722969304"
-     data-ad-slot="8025882334"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9621170722969304" crossorigin="anonymous"></script>
-</body>
+        // Send message when Enter key is pressed
+        $("input").on("keypress", function (e) {
+          if (e.which === 13) {
+            $("button").click();
+            return false;
+          }
+        });
+      });
+    </script>
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9621170722969304"
+      crossorigin="anonymous"
+    ></script>
+    <!-- deneme -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-9621170722969304"
+      data-ad-slot="8025882334"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9621170722969304"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
